@@ -1,20 +1,20 @@
 <div class="panel panel-primary">
     <div class="panel-heading">
-        <h2 class="panel-title">{{ image.title }}</h2>
+        <h2 class="panel-title">{{ photo.title }}</h2>
     </div>
     <div class="panel-body">
-        <p>{{ image.description }}</p>
+        <p>{{ photo.description }}</p>
         <div class="col-md-12 text-center">
-            <img src="/upload/{{image.filename}}" class="img-thumbnail">
+            <img src="/upload/{{photo.filename}}" class="img-thumbnail">
         </div>
     </div>
     <div class="panel-footer">
            <div class="row">
                <div class="col-md-8">
-                   <button class="btn btn-success" id="btn-like" data-id="{{ image.uniqueId }}"><i class="fa fa-heart"> Like</i></button>
-                   <strong class="likes-count">{{ image.likes }}</strong> 
-                   &nbsp; - &nbsp; <i class="fa fa-eye"></i><strong>{{ image.views }}</strong>
-                   &nbsp; - &nbsp; Posted: <em class="text-muted">{{ timeago image.timestamp }}</em>
+                   <button class="btn btn-success" id="btn-like" data-id="{{ photo.uniqueid }}"><i class="fa fa-heart"> Like</i></button>
+                   <strong class="likes-count">{{ photo.likes }}</strong> 
+                   &nbsp; - &nbsp; <i class="fa fa-eye"></i><strong>{{ photo.views }}</strong>
+                   &nbsp; - &nbsp; Posted: <em class="text-muted">{{ timeago photo.timestamp }}</em>
                </div>
            </div>
     </div>
@@ -28,7 +28,7 @@
             </div>
 
             <div class="col-md-4 text-right">
-                <button class="btn btn-default btn-sm" id="btn-comment" data-id="{{ image.uniqueId }}">
+                <button class="btn btn-default btn-sm" id="btn-comment" data-id="{{ photo.uniqueid }}">
                 <i class="fa fa-comments-o">Post Comment...</i></button>
             </div>
         </div>
@@ -36,7 +36,7 @@
     <div class="panel-body">
         <blockquote id="post-comment">
             <div class="row">
-                <form method="post" action="/images/{{ image.uniqueid }}/comment">
+                <form method="post" action="/photos/{{ photo.uniqueid }}/comment">
                     <div class="form-group col-sm-12">
                         <label class="col-sm-2 control-label" for="name">Name:</label>
                            <div class="col-sm-10">
@@ -70,8 +70,7 @@
                {{#each comments}}
                <li class="media">
                    <a class="pull-left" href="#">
-                       <img class="media-object img-circle"
-                            src="http://www.gravatar.com/avatar/{{gravatar}}?d=monsterid&s=45">
+                       <img class="media-object img-circle" src="http://www.gravatar.com/avatar/{{gravatar}}?d=monsterid&s=45">
                    </a>
                    <div class="media-body">
                        {{ comment }}
@@ -81,4 +80,4 @@
                {{/each}}
            </ul>
        </div>
-   </div>
+</div>

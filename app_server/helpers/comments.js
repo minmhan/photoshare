@@ -1,41 +1,26 @@
-module.exports = {
-    newest: function(){
-        var comments = [
-            {
-                imageid:1,
-                email:'min@mail.com',
-                name:'Min Min',
-                gravatar:  'http://lorempixel.com/75/75/animals/1',
-                comment:'this is comment 1',
-                timestamp: Date.now(),
-                image:{
-                    uniqueid:1,
-                    title: 'sample image',
-                    description:'',
-                    filename:'abc.jpg',
-                    views:0,
-                    likes:0,
-                    timestamp:Date.now()
-                }
-            },{
-                imageid:2,
-                email:'min@mail.com',
-                name:'Min Min',
-                gravatar:  'http://lorempixel.com/75/75/animals/1',
-                comment:'this is comment 1',
-                timestamp: Date.now(),
-                image:{
-                    uniqueid:1,
-                    title: 'sample image',
-                    description:'',
-                    filename:'abc.jpg',
-                    views:0,
-                    likes:0,
-                    timestamp:Date.now()
-                }
-            }
-        ];
+var async = require('async');
+var mongoose = require('mongoose');
 
-        return comments;
+var Comment = mongoose.model('Comment'); 
+var Photo = mongoose.model('Photo'); 
+
+module.exports = {
+    newest: function(callback){
+        //console.log('calling newest..');
+        Comment.find({}, {}, { limit: 5, sort: { 'timestamp': -1 }}, function(err, comments){
+            var attachPhoto = function(comment, next){
+                Photo.findOne({ _id: comment.photoid}, function(err, photo){
+                    //console.log(photo);
+                    if(err) throw err;
+                    comment.photo = photo;
+                    next(err);
+                });
+            }
+            //console.log(comments);
+            async.each(comments, attachPhoto, function(err){
+                if(err) throw err;
+                callback(err, comments);
+            });
+        });
     }
 };

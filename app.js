@@ -7,13 +7,13 @@ var bodyParser = require('body-parser');
 var hbs = require('hbs');
 var multer = require('multer');
 var moment = require('moment');
+require('./app_server/models/db');
 
 
-//var index = require('./routes/index');
-//var users = require('./routes/users');
 var photos = require('./app_server/routes/index')
 
 var app = express();
+app.disable('view cache');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'app_server/views'));
@@ -32,6 +32,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(multer({ dest:path.join(__dirname, 'public/upload') }).single("file"));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+
 
 app.use('/', photos);
 

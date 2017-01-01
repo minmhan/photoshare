@@ -33,9 +33,9 @@ module.exports = {
                 views:0,
                 likes:0,
                 timestamp: Date.now()
-            }
+            },
         ];
 
         return images;
     }
-};
+}
