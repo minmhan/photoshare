@@ -124,3 +124,21 @@ module.exports.comment = function(req, res){
     });
 }
 
+module.exports.delete = function(req, res){
+    Photo.findOne({filename:{$regex:req.params.photoid}}, function(err, photo){
+        if(err) throw err;
+        fs.unlink(path.resolve('./public/upload/' + photo.filename),function(err){
+            if(err) throw err;
+            Comment.remove( { photoid: photo._id}, function(err){
+                photo.remove(function(err){
+                    if(!err){
+                        res.json(true);
+                    }else{
+                        res.json(false);
+                    }
+                });
+            });
+        });
+    });
+};
+

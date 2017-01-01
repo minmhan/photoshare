@@ -16,6 +16,9 @@
                    &nbsp; - &nbsp; <i class="fa fa-eye"></i><strong>{{ photo.views }}</strong>
                    &nbsp; - &nbsp; Posted: <em class="text-muted">{{ timeago photo.timestamp }}</em>
                </div>
+               <div class="col-md-4 text-right">
+                   <button class="btn btn-danger" id="btn-delete" data-id="{{ photo.uniqueid }}"><i class="fa fa-times"> Delete</i>
+               </div>
            </div>
     </div>
 </div>
@@ -74,7 +77,7 @@
                    </a>
                    <div class="media-body">
                        {{ comment }}
-                       <br/><strong class="media-heading">{{ name }}</strong> <small class="text-muted">{{ timestamp }}</small>
+                       <br/><strong class="media-heading">{{ name }}</strong> <small class="text-muted">{{timeago timestamp }}</small>
                     </div>
                 </li>
                {{/each}}

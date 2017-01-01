@@ -12,5 +12,6 @@ router.get('/photos', photo.create);
 router.post('/photos', photo.create);
 router.post('/photos/:photoid/like', photo.like);
 router.post('/photos/:photoid/comment', photo.comment);
+router.delete('/photos/:photoid', photo.delete);
 
-module.exports = router;
+module.exports = router;    

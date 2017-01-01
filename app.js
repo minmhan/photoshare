@@ -13,7 +13,7 @@ require('./app_server/models/db');
 var photos = require('./app_server/routes/index')
 
 var app = express();
-app.disable('view cache');
+//app.disable('view cache');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'app_server/views'));
