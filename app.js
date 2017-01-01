@@ -5,6 +5,8 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var hbs = require('hbs');
+var multer = require('multer');
+var moment = require('moment');
 
 
 //var index = require('./routes/index');
@@ -16,6 +18,9 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'app_server/views'));
 
+hbs.registerHelper('timeago', function(timestamp){
+  return moment(timestamp).startOf('minute').fromNow();
+});
 hbs.registerPartials(__dirname + '/app_server/views/_partials');
 app.set('view engine', 'hbs');
 
@@ -24,11 +29,10 @@ app.set('view engine', 'hbs');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(multer({ dest:path.join(__dirname, 'public/upload') }).single("file"));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-///app.use('/', index);
-//app.use('/users', users);
 app.use('/', photos);
 
 // catch 404 and forward to error handler
