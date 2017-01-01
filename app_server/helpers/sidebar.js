@@ -12,7 +12,8 @@ module.exports = function(viewModel, callback){
     console.log('side bar ...');
     async.parallel([
         function(next){
-            next(null, Stats());
+            //next(null, Stats());
+            Stats(next);
         },
         function(next){
             next(null, photos.popular());
